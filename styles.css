@@ -1,0 +1,165 @@
+/* styles.css */
+
+/* Box sizing y estilo base */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root{
+  --bg1: #0f172a;   /* azul oscuro */
+  --bg2: #0b3b6f;   /* azul medio */
+  --card: rgba(255,255,255,0.06);
+  --accent: #ffd166; /* amarillo suave */
+  --text: #f8fafc;
+  --muted: #cbd5e1;
+  --glass: rgba(255,255,255,0.04);
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background: linear-gradient(160deg, var(--bg1) 0%, var(--bg2) 100%);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  padding: 32px;
+}
+
+/* Contenedor principal (aplica centrado y ancho máximo) */
+body > header,
+body > main,
+body > footer {
+  /* (no hay header/main/footer en tu HTML original, se deja por compatibilidad) */
+}
+
+h1 {
+  text-align: center;
+  margin: 8px auto 24px;
+  font-size: 2.1rem;
+  letter-spacing: 1px;
+  color: var(--accent);
+  text-shadow: 0 4px 18px rgba(0,0,0,0.6);
+}
+
+/* Caja para la lista y galería: centra y añade padding */
+ol {
+  max-width: 760px;
+  margin: 0 auto 28px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+  padding: 18px 22px;
+  border-radius: 12px;
+  border: 1px solid var(--glass);
+  box-shadow: 0 6px 18px rgba(2,6,23,0.6);
+  counter-reset: signo;
+}
+
+/* Estilo de los elementos de la lista con numeración personalizada */
+ol li{
+  list-style: none; /* quitamos el marker nativo */
+  position: relative;
+  padding: 14px 16px;
+  margin: 8px 0;
+  background: rgba(255,255,255,0.02);
+  border-radius: 8px;
+  transition: transform .18s ease, background .18s ease;
+  counter-increment: signo;
+  display: flex;
+  align-items: center;
+}
+
+/* número circular a la izquierda */
+ol li::before{
+  content: counter(signo);
+  width: 36px;
+  height: 36px;
+  line-height: 36px;
+  text-align: center;
+  margin-right: 14px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.06);
+  color: var(--accent);
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(2,6,23,0.5), inset 0 -2px 0 rgba(0,0,0,0.12);
+  flex: 0 0 36px;
+}
+
+/* hover ligero */
+ol li:hover{
+  transform: translateY(-4px);
+  background: rgba(255,255,255,0.035);
+}
+
+/* Texto del item */
+ol li {
+  font-size: 1.05rem;
+  color: var(--text);
+}
+
+/* Galería de imágenes y pies de foto:
+   Tus imágenes y <p> están intercaladas; las dejamos fluir en línea pero con estilo. */
+img {
+  display: inline-block;
+  width: 150px;           /* respeta el tamaño que usaste, pero se hace responsivo abajo */
+  height: 150px;
+  object-fit: cover;
+  margin: 12px;
+  border-radius: 12px;
+  border: 2px solid rgba(255,255,255,0.06);
+  box-shadow: 0 8px 20px rgba(2,6,23,0.6);
+  vertical-align: middle;
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+
+/* efecto hover sobre imágenes */
+img:hover{
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 18px 36px rgba(2,6,23,0.7);
+}
+
+/* pies de foto (las etiquetas <p> que pones después de cada imagen) */
+img + p {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 8px 0 4px;
+  font-weight: 700;
+  letter-spacing: 8px;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+/* Si quieres que cada imagen + caption ocupe su "tarjeta" en pantallas pequeñas,
+   lo forzamos para que se muestre en bloque en pantallas estrechas */
+@media (max-width: 640px) {
+  img, img + p {
+    display: block;
+    margin: 12px auto;
+    text-align: center;
+  }
+
+  img + p {
+    letter-spacing: 5px;
+    margin-top: 8px;
+  }
+
+  ol {
+    padding: 12px;
+  }
+}
+
+/* Hiperaccesibilidad: foco visible para usuarios que navegan con teclado */
+img:focus, ol li:focus {
+  outline: 3px solid rgba(255,209,102,0.18);
+  outline-offset: 3px;
+}
+
+/* Pequeño pie de página visual (si quieres añadir uno) */
+footer {
+  text-align: center;
+  color: var(--muted);
+  margin-top: 28px;
+  font-size: 0.9rem;
+}
